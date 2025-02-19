@@ -1,12 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
-export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  isFavorite?: boolean;
-}
+import { Book } from '../interfaces/book.interface';
 
 const books: Book[] = [
   { id: 1, title: 'El Principito', author: 'Antoine de Saint-Exupéry' },

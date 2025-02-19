@@ -2,7 +2,8 @@ import { Component, inject, linkedSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { BookCardComponent } from '../components/book-card.component';
-import { Book, BooksService } from '../services/books.service';
+import { BooksService } from '../services/books.service';
+import { Book } from '../interfaces/book.interface';
 
 @Component({
   selector: 'app-home',
