@@ -5,7 +5,7 @@ import { BooksService } from '../services/books.service';
 @Component({
   selector: 'app-home',
   template: `
-    <div class="w-full max-w-4xl mt-12 mx-auto">
+    <div class="w-full max-w-4xl mt-12 mx-auto px-4">
       <h1 class="text-2xl font-bold mb-4">Favorites Books!</h1>
 
       <div class="bg-white rounded-lg p-4 flex items-center">
@@ -17,7 +17,7 @@ import { BooksService } from '../services/books.service';
         />
       </div>
 
-      <div class="grid grid-cols-3 gap-4 mt-8">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         @for(book of booksToShow(); track book.id) {
         <app-book-card [book]="book" />
         }

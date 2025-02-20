@@ -8,12 +8,12 @@ import { Book } from '../interfaces/book.interface';
 @Component({
   selector: 'app-home',
   template: `
-    <div class="w-full max-w-4xl mt-12 mx-auto">
+    <div class="w-full max-w-4xl mt-12 mx-auto px-4">
       <h1 class="text-2xl font-bold mb-4">Ngrx Signal Books!</h1>
 
       <p>Welcome to the Ngrx Signal Books app!</p>
 
-      <div class="grid grid-cols-3 gap-4 mt-8">
+      <div class="grid grid-cols-2  lg:grid-cols-3 gap-4 mt-8">
         @for(book of booksToShow(); track book.id) {
         <app-book-card [book]="book" (onFavorite)="favoriteBook($event)" />
         }
