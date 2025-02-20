@@ -1,9 +1,8 @@
-import { Component, inject, linkedSignal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject } from '@angular/core';
 
 import { BookCardComponent } from '../components/book-card.component';
-import { BooksService } from '../services/books.service';
 import { Book } from '../interfaces/book.interface';
+import { BooksStore } from '../services/books.store';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,7 @@ import { Book } from '../interfaces/book.interface';
       <p>Welcome to the Ngrx Signal Books app!</p>
 
       <div class="grid grid-cols-2  lg:grid-cols-3 gap-4 mt-8">
-        @for(book of booksToShow(); track book.id) {
+        @for(book of booksStore.books(); track book.id) {
         <app-book-card [book]="book" (onFavorite)="favoriteBook($event)" />
         }
       </div>
@@ -23,19 +22,9 @@ import { Book } from '../interfaces/book.interface';
   imports: [BookCardComponent],
 })
 export default class HomeComponent {
-  booksService = inject(BooksService);
-
-  books = toSignal(this.booksService.getBooks(), { initialValue: [] });
-
-  booksToShow = linkedSignal<Book[]>(() => this.books());
+  booksStore = inject(BooksStore);
 
   favoriteBook(book: Book) {
-    this.booksToShow.update((books) => {
-      return books.filter((b) => b.id !== book.id);
-    });
-
-    this.booksService.favoritesBooks.update((books) => {
-      return [...books, { ...book, isFavorite: true }];
-    });
+    this.booksStore.addFavorite(book);
   }
 }
