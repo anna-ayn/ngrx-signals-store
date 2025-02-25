@@ -39,11 +39,17 @@ import { Book } from '../interfaces/book.interface';
   `,
 })
 export class BookCardComponent {
+  // La propiedad input nos permite recibir datos desde el componente padre
   book = input.required<Book>();
 
+  // La propiedad output nos permite emitir eventos al componente padre
+  // En este caso, emitiremos un evento de tipo Book
   onFavorite = output<Book>();
 
+  // Método para emitir el evento al componente padre
   clickButton() {
+    // onFavorite.emit() emite el evento al componente padre
+    // y le enviamos el libro actual
     this.onFavorite.emit(this.book());
   }
 }

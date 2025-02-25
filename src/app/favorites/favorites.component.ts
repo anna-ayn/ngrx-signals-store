@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { BookCardComponent } from '../components/book-card.component';
 import { BooksService } from '../services/books.service';
+import { BooksStore } from '../services/book.store';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ import { BooksService } from '../services/books.service';
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        @for(book of booksToShow(); track book.id) {
+        @for(book of booksStore.booksToShow(); track book.id) {
         <app-book-card [book]="book" />
         }
       </div>
@@ -27,26 +28,29 @@ import { BooksService } from '../services/books.service';
   imports: [BookCardComponent],
 })
 export default class FavoritesComponent {
-  booksService = inject(BooksService);
+  // booksService = inject(BooksService);
 
-  books = this.booksService.favoritesBooks;
+  booksStore = inject(BooksStore);
 
-  query = signal<string>('');
+  // books = this.booksService.favoritesBooks;
 
-  booksToShow = computed(() => {
-    const query = this.query();
-    const books = this.books();
+  // query = signal<string>('');
 
-    if (!query) {
-      return books;
-    }
+  // booksToShow = computed(() => {
+  // const query = this.query();
+  // const books = this.books();
 
-    return books.filter((book) => {
-      return book.title.toLowerCase().includes(query.toLowerCase());
-    });
-  });
+  // if (!query) {
+  //   return books;
+  // }
+
+  // return books.filter((book) => {
+  //   return book.title.toLowerCase().includes(query.toLowerCase());
+  // });
+  // });
 
   search(value: string) {
-    this.query.set(value);
+    // this.query.set(value);
+    this.booksStore.setQuery(value);
   }
 }

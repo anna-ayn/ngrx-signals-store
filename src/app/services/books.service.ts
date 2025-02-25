@@ -31,10 +31,12 @@ const books: Book[] = [
 
 @Injectable({ providedIn: 'root' })
 export class BooksService {
-  favoritesBooks = signal<Book[]>([]);
+  favoritesBooks = signal<Book[]>([]); // inicializamos el observable con un array vacío
 
+  // Método para obtener los libros
   getBooks(): Observable<Book[]> {
     console.log('observable');
+    // el metodo of crea un observable con el arreglo de libros
     return of(books);
   }
 }
